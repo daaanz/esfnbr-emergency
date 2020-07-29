@@ -13,21 +13,23 @@ headers = {'Accept-Language': 'es-ES'}
 
 setDelay = 60
 
-res = requests.get(url, headers = headers).json()
-emergency = res['emergencynotice']['news']['messages']
+res0 = requests.get(url, headers = headers).json()
+emergency = res0['emergencynotice']['news']['messages']
 
 playlist = emergency[0]['playlistId']
 body = emergency[0]['body']
 title = emergency[0]['title']
 
 while 1:
-    emergencyNew = res['emergencynotice']['news']['messages']
+    res1 = requests.get(url, headers = headers).json()
+    emergencyNew = res1['emergencynotice']['news']['messages']
     if emergencyNew != emergency:
         try:
             print('Se ha detectado ' + emergencyNew[0]['title'])
             api.update_with_media('assets/emergency.png', title + ' (' + playlist + ')' '\n\n' + body)
             print('Publicado correctamente.')
-            emergency = res['emergencynotice']['news']['messages']
+            res2 = requests.get(url, headers = headers).json()
+            emergency = res2['emergencynotice']['news']['messages']
         except:
             print('No se ha podido enviar el Tweet.')
     else:

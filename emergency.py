@@ -18,14 +18,14 @@ emergency = res0['emergencynotice']['news']['messages']
 
 while 1:
     try:
-        playlist = emergency['playlistId']
-        body = emergency['body']
-        title = emergency['title']
         res1 = requests.get(url, headers = headers).json()
         emergencyNew = res1['emergencynotice']['news']['messages']
         if emergencyNew != emergency:
             try:
                 for i in emergencyNew:
+                    playlist = emergency['playlistId']
+                    body = emergency['body']
+                    title = emergency['title']
                     print('Se ha detectado ' + emergencyNew + i['title'])
                     api.update_with_media('assets/emergency.png', i['title'] + ' (' + i['playlist'] + ')' '\n\n' + i['body'])
                     print('Publicado correctamente.')

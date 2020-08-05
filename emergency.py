@@ -27,7 +27,7 @@ while 1:
                     body = emergency['body']
                     title = emergency['title']
                     print('Se ha detectado ' + emergencyNew + i['title'])
-                    api.update_with_media('assets/emergency.png', i['title'] + ' (' + i['playlist'] + ')' '\n\n' + i['body'])
+                    api.update_status(i['title'] + ' (' + i['playlist'] + ')' '\n\n' + i['body'])
                     print('Publicado correctamente.')
                 res2 = requests.get(url, headers = headers).json()
                 emergency = res2['emergencynotice']['news']['messages']
